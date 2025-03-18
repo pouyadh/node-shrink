@@ -52,6 +52,17 @@ router.delete('/list/:id', async (req, res) => {
   }
 });
 
+router.delete('/url/:id', async (req, res) => {
+  try {
+    const urlId = req.params.id;
+    await db.execute('DELETE FROM urls WHERE id=?', [urlId]);
+    res.status(201);
+  } catch (error) {
+    console.error('Database error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 router.post('/list/:id', async (req, res) => {
   const listId = req.params.id;
   const { url, urls } = await req.body;
