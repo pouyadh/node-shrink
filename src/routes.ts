@@ -64,6 +64,7 @@ router.post('/list/:id', async (req, res) => {
 
     res.status(201).json({
       message: `Item successfully created. the id is ${result.insertId}`,
+      newLink: `${process.env.BASE_URL}/api/url/${result.insertId}`,
     });
   } else if (urls) {
     const placeholders = urls.map(() => '(?,?,?,?)').join(', ');
